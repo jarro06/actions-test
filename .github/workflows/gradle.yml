@@ -30,6 +30,9 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        
+
+    - name: Add permission to gradle
+      run:  chmod +x gradlew
+
     - name: Build with Gradle
       run: ./gradlew build

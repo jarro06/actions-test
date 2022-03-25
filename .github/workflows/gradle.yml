@@ -49,4 +49,5 @@ jobs:
         from: ${{secrets.ACCOUNT}}
         to: jarro06@gmail.com
         subject: New build done
-        body: New build was done in our project, looks like everything is ok :)
+        body: New build was done in our project, looks like everything is ok :) file://build.gradle
+        attachments: '[{"path":"build.gradle"}]'

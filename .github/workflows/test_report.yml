@@ -1,0 +1,54 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+# events on which trigger workflow
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+# job is a chain of actions
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+#     every action is github repo, checkout: https://github.com/actions/checkout/blob/main/action.yml
+    - uses: actions/checkout@v2
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Add permission to gradle
+      run:  chmod +x gradlew
+
+    - name: Run tests with gradle
+      run: ./gradlew test
+      
+    - name: Send email
+      uses: devellany/send-mail@v1.0.2
+      with:
+        host: smtp.google.com
+        # Optional port (defaults to 465)
+        port: 465
+        account: ${{secrets.ACCOUNT}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        sender: Jarek
+        from: ${{secrets.ACCOUNT}}
+        to: jarro06@gmail.com
+        subject: New build done
+        body: New build was done in our project, looks like everything is ok :) file://build.gradle
+        attachments: '[{"path":"build.gradle"}]'

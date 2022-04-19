@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +8,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DemoApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void testPassed() {
+		Assertions.assertTrue(true);
 	}
 
+	@Test
+	void testFailed() {
+		Assertions.assertTrue(false);
+	}
+
+	@Test
+	void testException() {
+		throw new RuntimeException();
+	}
 }

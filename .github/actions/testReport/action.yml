@@ -1,0 +1,12 @@
+name: "Github Action for creating test report"
+author: "Jarosław Ciarkowski"
+description: "create test report based on junit test suite xml files"
+
+inputs:
+  path:
+    description: "Path to xml test suites"
+    required: true
+
+runs:
+  using: "node16"
+  main: "dist/index.js"

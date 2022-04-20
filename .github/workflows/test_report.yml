@@ -38,7 +38,12 @@ jobs:
     - name: Run tests with gradle
       continue-on-error: true
       run: ./gradlew test
-      
+
+    - name: Generate test report
+      uses: ./.github/actions/testReport
+      with:
+        path: '**/build/test-results/test/TEST-*.xml'
+
     - name: Send email
       uses: devellany/send-mail@v1.0.2
       with:

@@ -42,8 +42,14 @@ jobs:
     - name: Generate test report
       uses: ./.github/actions/testReport
       with:
+#        just sample link to show that it works
         heroldUrl: 'https://www.google.com/'
+#        gradle test report path
         path: '/home/runner/work/actions-test/actions-test/build/test-results/test'
+        header1: 'Junit Tests'
+        header2: 'Made for test project'
+        header3: 'Run using gradle'
+        failedTestProjects: 'some testsuite,another one, one more'
 
     - name: Send email
       uses: devellany/send-mail@v1.0.2

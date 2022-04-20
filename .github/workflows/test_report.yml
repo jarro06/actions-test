@@ -42,7 +42,7 @@ jobs:
     - name: Generate test report
       uses: ./.github/actions/testReport
       with:
-        path: './testResults'
+        path: ' **/build/test-results'
 
     - name: Send email
       uses: devellany/send-mail@v1.0.2

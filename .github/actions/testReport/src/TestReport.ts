@@ -8,7 +8,10 @@ export function formatHtmlReport(heroldUrl: string, pathToTeamResult: string, he
     const DOMParser = require('xmldom').DOMParser;
     const parser = new DOMParser();
 
-    let fileNames: string[] = fs.readdirSync(pathToTeamResult);
+    //get only files (omit unnecessary directories)
+    let fileNames: string[] = fs.readdirSync(pathToTeamResult, {withFileTypes: true})
+        .filter(entry => entry.isFile())
+        .map(entry => entry.name);
 
     //get "whole report" data
     let reportData: ReportData = new ReportData(heroldUrl, header1, header2, header3, listWithFailedTestProjects);

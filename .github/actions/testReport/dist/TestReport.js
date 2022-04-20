@@ -12,7 +12,10 @@ const fs_1 = __importDefault(require("fs"));
 function formatHtmlReport(heroldUrl, pathToTeamResult, header1, header2, header3, listWithFailedTestProjects) {
     const DOMParser = require('xmldom').DOMParser;
     const parser = new DOMParser();
-    let fileNames = fs_1.default.readdirSync(pathToTeamResult);
+    //get only files (omit unnecessary directories)
+    let fileNames = fs_1.default.readdirSync(pathToTeamResult, { withFileTypes: true })
+        .filter(entry => entry.isFile())
+        .map(entry => entry.name);
     //get "whole report" data
     let reportData = new ReportData_1.ReportData(heroldUrl, header1, header2, header3, listWithFailedTestProjects);
     //iterate through files/test suites/test cases to get suite/case data needed for report

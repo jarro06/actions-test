@@ -39,9 +39,6 @@ jobs:
       continue-on-error: true
       run: ./gradlew test
 
-    - name: Add permission to test results
-      run:  chmod +x /home/runner/work/actions-test/actions-test/build/test-results/test
-
     - name: Generate test report
       uses: ./.github/actions/testReport
       with:

@@ -8,9 +8,7 @@ export function formatHtmlReport(heroldUrl: string, pathToTeamResult: string, he
     const DOMParser = require('xmldom').DOMParser;
     const parser = new DOMParser();
 
-    //TODO - take files from param
-    let resultPath: string = "C:\\Users\\ADMIN\\IdeaProjects\\ts-action\\testResults";
-    let fileNames: string[] = fs.readdirSync(resultPath);
+    let fileNames: string[] = fs.readdirSync(pathToTeamResult);
 
     //get "whole report" data
     let reportData: ReportData = new ReportData(heroldUrl, header1, header2, header3, listWithFailedTestProjects);
@@ -20,7 +18,7 @@ export function formatHtmlReport(heroldUrl: string, pathToTeamResult: string, he
     fileNames.forEach((file: string) => {
 
         //read xml files, get test suite nodes
-        let content = fs.readFileSync(resultPath + "/" + file, "utf8");
+        let content = fs.readFileSync(pathToTeamResult + "/" + file, "utf8");
         let xmlContent = parser.parseFromString(content);
         let testSuites: any[] = xmlContent.getElementsByTagName("testsuite");
 

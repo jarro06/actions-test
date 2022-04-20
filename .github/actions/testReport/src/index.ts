@@ -12,6 +12,7 @@ generateReport(heroldUrl, path, header1, header2, header3, failedTestProjects)
 
 function generateReport(heroldUrl: string, path: string, header1: string, header2: string, header3: string, failedTestProjects: string) {
     console.log(`'Path to report xml files: ${path}'`)
-    let html:string = formatHtmlReport(heroldUrl, path, header1, header2, header3, failedTestProjects.split(","))
+    let listOfFailedTestProjects = failedTestProjects.length === 0 ? [] : failedTestProjects.split(",");
+    let html:string = formatHtmlReport(heroldUrl, path, header1, header2, header3, listOfFailedTestProjects)
     console.log(html);
 }

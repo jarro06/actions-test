@@ -11,6 +11,7 @@ const failedTestProjects = (0, core_1.getInput)("failedTestProjects");
 generateReport(heroldUrl, path, header1, header2, header3, failedTestProjects);
 function generateReport(heroldUrl, path, header1, header2, header3, failedTestProjects) {
     console.log(`'Path to report xml files: ${path}'`);
-    let html = (0, TestReport_1.formatHtmlReport)(heroldUrl, path, header1, header2, header3, failedTestProjects.split(","));
+    let listOfFailedTestProjects = failedTestProjects.length === 0 ? [] : failedTestProjects.split(",");
+    let html = (0, TestReport_1.formatHtmlReport)(heroldUrl, path, header1, header2, header3, listOfFailedTestProjects);
     console.log(html);
 }

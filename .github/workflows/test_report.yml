@@ -47,7 +47,7 @@ jobs:
         header1: 'Junit Tests'
         header2: 'Made for test project'
         header3: 'Run using gradle'
-        failedTestProjects: '1,2,3'
+        failedTestProjects: 'some testsuite,another one,3'
 
     - name: Send email
       uses: devellany/send-mail@v1.0.2

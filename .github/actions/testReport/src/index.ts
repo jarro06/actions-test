@@ -1,14 +1,17 @@
 import { getInput } from "@actions/core"
 import {formatHtmlReport} from "./TestReport";
 
-const inputName: string = getInput("path")
+const heroldUrl: string = getInput("heroldUrl")
+const path: string = getInput("path")
+const header1: string = getInput("header1")
+const header2: string = getInput("header2")
+const header3: string = getInput("header3")
+const failedTestProjects: string = getInput("failedTestProjects")
 
-generateReport(inputName)
+generateReport(heroldUrl, path, header1, header2, header3, failedTestProjects)
 
-async function generateReport(path: string) {
-    console.log(`'Path to report xml files: ${path}!'`)
-    let html:string = formatHtmlReport("localhost:8080", path, "header1", "header2", "header3", ["1","2","3"])
+function generateReport(heroldUrl: string, path: string, header1: string, header2: string, header3: string, failedTestProjects: string) {
+    console.log(`'Path to report xml files: ${path}'`)
+    let html:string = formatHtmlReport(heroldUrl, path, header1, header2, header3, failedTestProjects.split(","))
     console.log(html);
 }
-
-

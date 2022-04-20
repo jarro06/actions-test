@@ -3,9 +3,28 @@ author: "Jarosław Ciarkowski"
 description: "create test report based on junit test suite xml files"
 
 inputs:
+  heroldUrl:
+    description: "Herold url link"
+    required: true
   path:
     description: "Path to xml test suites"
     required: true
+  header1:
+    description: "Test result header1"
+    required: false
+    default: ""
+  header2:
+    description: "Test result header2"
+    required: false
+    default: ""
+  header3:
+    description: "Test result header3"
+    required: false
+    default: ""
+  failedTestProjects:
+    description: "List of failed test projects"
+    required: false
+    default: ""
 
 runs:
   using: "node16"

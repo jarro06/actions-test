@@ -55,10 +55,10 @@ jobs:
     - name: Send email
       uses: dawidd6/action-send-mail@v3
       with:
-        host: smtp.freesmtpservers.com
+        server_address: smtp.freesmtpservers.com
         # Optional port (defaults to 465)
-        port: 25
-        account:  jarektestujemaile@mojmail.com
+        server_port: 25
+        username:  jarektestujemaile@mojmail.com
         password: no_auth
         sender: Jarek
         from: jarektestujemaile@mojmail.com

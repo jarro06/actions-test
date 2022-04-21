@@ -1,4 +1,4 @@
-import { getInput } from "@actions/core"
+import { getInput, setOutput } from "@actions/core"
 import {formatHtmlReport} from "./TestReport";
 
 const heroldUrl: string = getInput("heroldUrl")
@@ -15,4 +15,5 @@ function generateReport(heroldUrl: string, path: string, header1: string, header
     let listOfFailedTestProjects = failedTestProjects.length === 0 ? [] : failedTestProjects.split(",");
     let html:string = formatHtmlReport(heroldUrl, path, header1, header2, header3, listOfFailedTestProjects)
     console.log(html);
+    setOutput("html", html);
 }

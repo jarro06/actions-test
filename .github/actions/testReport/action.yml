@@ -26,6 +26,10 @@ inputs:
     required: false
     default: ""
 
+outputs:
+  html:
+    description: 'test report html'
+
 runs:
   using: "node16"
   main: "dist/index.js"

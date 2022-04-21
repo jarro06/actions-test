@@ -40,6 +40,7 @@ jobs:
       run: ./gradlew test
 
     - name: Generate test report
+      id: test_report
       uses: ./.github/actions/testReport
       with:
 #        just sample link to show that it works
@@ -62,6 +63,5 @@ jobs:
         sender: Jarek
         from: jarektestujemaile@mojmail.com
         to: jarro06@gmail.com
-        subject: New build done
-        body: New build was done in our project, looks like everything is ok :) file://build.gradle
-        attachments: '[{"path":"build.gradle"}]'
+        subject: Test report
+        body: ${{ steps.test_report.outputs.html }}

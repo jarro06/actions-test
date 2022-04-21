@@ -14,4 +14,5 @@ function generateReport(heroldUrl, path, header1, header2, header3, failedTestPr
     let listOfFailedTestProjects = failedTestProjects.length === 0 ? [] : failedTestProjects.split(",");
     let html = (0, TestReport_1.formatHtmlReport)(heroldUrl, path, header1, header2, header3, listOfFailedTestProjects);
     console.log(html);
+    (0, core_1.setOutput)("html", html);
 }

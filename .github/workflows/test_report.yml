@@ -54,13 +54,12 @@ jobs:
     - name: Send email
       uses: devellany/send-mail@v1.0.2
       with:
-        host: smtp.google.com
+        host: smtp.freesmtpservers.com
         # Optional port (defaults to 465)
-        port: 465
-        account: ${{secrets.ACCOUNT}}
-        password: ${{secrets.MAIL_PASSWORD}}
+        port: 25
+        account:  jarektestujemaile@mojmail.com
         sender: Jarek
-        from: ${{secrets.ACCOUNT}}
+        from: jarektestujemaile@mojmail.com
         to: jarro06@gmail.com
         subject: New build done
         body: New build was done in our project, looks like everything is ok :) file://build.gradle

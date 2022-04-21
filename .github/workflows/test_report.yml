@@ -65,4 +65,4 @@ jobs:
         to: jarro06@gmail.com
         subject: Test report
         body: ${{ steps.test_report.outputs.html }}
-        convert_markdown: true
+        contentType: 'text/html'

@@ -8,6 +8,7 @@ class ReportTemplate {
     }
     getTemplate() {
         return `
+        <!DOCTYPE html>
         <html>
           <head>
             <meta charset='utf-8' />

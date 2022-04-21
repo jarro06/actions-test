@@ -13,6 +13,7 @@ export class ReportTemplate {
 
     getTemplate(): string {
         return `
+        <!DOCTYPE html>
         <html>
           <head>
             <meta charset='utf-8' />

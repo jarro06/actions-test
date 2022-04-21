@@ -55,13 +55,12 @@ jobs:
     - name: Send email
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.freesmtpservers.com
+        server_address: smtp.gmail.com
         # Optional port (defaults to 465)
-        server_port: 25
-        username:  jarektestujemaile@mojmail.com
-        password: no_auth
-        sender: Jarek
-        from: jarektestujemaile@mojmail.com
+        server_port: 587
+        username: ${{secrets.ACCOUNT}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        from: ${{secrets.ACCOUNT}}
         to: jarro06@gmail.com
         subject: Test report
         html_body: ${{ steps.test_report.outputs.html }}

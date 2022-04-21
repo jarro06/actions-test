@@ -63,6 +63,6 @@ jobs:
         from: ${{secrets.ACCOUNT}}
         to: jarro06@gmail.com
         subject: Test report
-        html_body: ${{ steps.test_report.outputs.html }}
+        html_body: file://templatePage.html
         convert_markdown: true
         secure: true

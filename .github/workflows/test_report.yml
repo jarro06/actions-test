@@ -63,5 +63,5 @@ jobs:
         from: Jarek
         to: jarro06@gmail.com
         subject: Test report
-        body: ${{ steps.test_report.outputs.html }}
+        html_body: ${{ steps.test_report.outputs.html }}
         convert_markdown: true

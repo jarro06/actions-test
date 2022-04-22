@@ -32,6 +32,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+# for maven project we will need different steps
     - name: Add permission to gradle
       run:  chmod +x gradlew
 
@@ -45,23 +46,27 @@ jobs:
       with:
 #        just sample link to show that it works
         heroldUrl: 'https://www.google.com/'
-#        gradle test report path
+#        gradle test report path (for maven project probably we will need another path here)
         path: '/home/runner/work/actions-test/actions-test/build/test-results/test'
         header1: 'Junit Tests'
         header2: 'Made for test project'
         header3: 'Run using gradle'
         failedTestProjects: 'some testsuite,another one, one more'
 
+# 3rd party action - but used by lots of people, I looked into code, there is nothing suspicious there.
+# If we need we can create own send mailaction but I think it's not needed
     - name: Send email
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         # Optional port (defaults to 465)
         server_port: 465
+#       send email from account set in github repo to itself, just to show it works
         username:  ${{secrets.ACCOUNT}}
         password: ${{secrets.MAIL_PASSWORD}}
         from: ${{secrets.ACCOUNT}}
-        to: jarro06@gmail.com
+        to: ${{secrets.ACCOUNT}}
         subject: Test report
+#       html output from previous step is used here
         html_body: ${{ steps.test_report.outputs.html }}
         secure: true

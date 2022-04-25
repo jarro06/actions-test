@@ -1,14 +1,5 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+name: Upload and download files to.from Jfrog Artifactory
 
-name: Upload artifact to Jfrog Artifactory
-
-# events on which trigger workflow
-# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 on:
   push:
     branches: [ main ]
@@ -16,14 +7,11 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# job is a chain of actions
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-#     every action is github repo, checkout: https://github.com/actions/checkout/blob/main/action.yml
     - uses: actions/checkout@v2
     - uses: jfrog/setup-jfrog-cli@v2
 
@@ -33,21 +21,19 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-      # for maven project we will need different steps
     - name: Add permission to gradle
       run: chmod +x gradlew
 
-    - name: Build project
+    - name: Build gradle project
       run: ./gradlew build -x test
 
-    # connects to jfrog cli with artifactory url and access token (access token can be created in jfrog control panel
-    - name: Log into Jfrog Artifactory
+    # connects to JFrog CLI with artifactory url and access token (access token can be created in JFrog control panel
+    - name: Log into JFrog Artifactory
       run: |
         jf c add kermit --artifactory-url=${{ secrets.JF_ARTIFACTORY_SERVER_URL }} --access-token=${{ secrets.JF_ACCSESS_TOKEN }}
 
-    # "/build" is pattern, example-repo-local is target
     # upload all files under /build to "example-repo-local" repository in artifactory
-    # can also specify regex for files to upload or upload single file - for more info go to  jfrog repository documentation
+    # can also specify regex for files to upload or upload single file - for more info go to  JFrog repository documentation
     # https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory
     - name: Upload all build files to repository
       run: |

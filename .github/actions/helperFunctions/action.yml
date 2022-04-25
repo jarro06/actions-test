@@ -1,0 +1,16 @@
+name: "Helper Methods"
+author: "Filip Nawrot"
+description: "Custom GH action with TypeScript"
+
+inputs:
+  name:
+    description: "Name to greet"
+    required: false
+    default: "asd"
+  ghToken:
+    description: "Github access token"
+    required: false
+
+runs:
+  using: "node16"
+  main: "dist/index.js"

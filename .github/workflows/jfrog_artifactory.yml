@@ -27,7 +27,6 @@ jobs:
     - uses: actions/checkout@v2
     - uses: jfrog/setup-jfrog-cli@v2
 
-
     - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
@@ -58,3 +57,8 @@ jobs:
     - name: Upload jars to different repository
       run: |
         jf rt upload "build/**/*.jar" my-project-jars-gradle-dev-local
+
+      # download uploaded jars
+    - name: Download jars from repository
+      run: |
+        jf rt download my-project-jars-gradle-dev-local my-jars/

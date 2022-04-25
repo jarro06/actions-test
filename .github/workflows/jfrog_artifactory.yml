@@ -48,8 +48,10 @@ jobs:
       # upload all files under /build to "example-repo-local" repository in artifactory
       # can also specify regex for files to upload or upload single file - for more info go to  jfrog repository documentation
       # https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory
-
-    #   upload only jars "upload all" from shared libraries
     - uses: jfrog/setup-jfrog-cli@v2
-     - run: |
-        jf rt upload "build/**/*.jar" example-repo-local
+    - run: |
+        jf rt upload "build/" example-repo-local
+    #   upload only jars "upload all" - from shared libraries
+    - uses: jfrog/setup-jfrog-cli@v2
+    - run: |
+        jf rt upload "build/**/*.jar" my-jar-repository

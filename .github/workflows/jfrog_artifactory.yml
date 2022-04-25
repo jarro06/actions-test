@@ -56,7 +56,7 @@ jobs:
     # upload only jars "upload all" - from shared libraries
     - name: Upload jars to different repository
       run: |
-        jf rt upload "build/**/*.jar" my-project-jars-gradle-dev-local
+        jf rt upload "build/*.jar" my-project-jars-gradle-dev-local
 
       # download uploaded jars
     - name: Download jars from repository
@@ -66,4 +66,4 @@ jobs:
     # echo downloaded files
     - name: Show downloaded files
       run: |
-        ls ${{ github.workspace }}/my-jars
+        ls ${{ github.workspace }}/my-jars/build/libs

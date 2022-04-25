@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cleanUpBranchesMatchingPattern = exports.deleteBranch = exports.getAllBranchesNames = exports.createBranch = exports.createFile = exports.initFlow = exports.cleanUpSynchPullRequests = exports.updateCommitStatusSuccess = exports.updateCommitStatusFailure = exports.updateCommitStatusPending = exports.updateCommitStatusError = exports.createPullRequest = exports.validateCommitMessages = exports.setLabels = exports.writeCommentToPr = exports.getAllOpenPullRequests = void 0;
 const github_1 = require("@actions/github");
+// ghe file
 async function getAllOpenPullRequests(ghToken) {
     console.log('get all open pull requests');
     return await (0, github_1.getOctokit)(ghToken).rest.pulls.list({
@@ -117,9 +118,7 @@ function cleanUpSynchPullRequests(ghToken) {
     }));
 }
 exports.cleanUpSynchPullRequests = cleanUpSynchPullRequests;
-// second file
-//
-//
+// git file
 async function initFlow(ghToken) {
     let content = "\nHello Repo, you are now a git flow project";
     let path = "README.md";

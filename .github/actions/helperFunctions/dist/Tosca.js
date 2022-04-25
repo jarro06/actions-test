@@ -1,7 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTestEventXml = exports.createConfigFile = void 0;
+exports.createTestEventXml = exports.createConfigFile = exports.runToscaTestForSingleEntity = exports.runToscaTestForSpecificEntity = exports.runParallel = exports.downloadJar = void 0;
 const fs_1 = require("fs");
+const ShUtils_1 = require("./ShUtils");
+function downloadJar(ciClientUrl) {
+    console.log(`download jar from ${ciClientUrl}`);
+    (0, ShUtils_1.execInShell)(`wget -O ToscaCIJavaClient.jar ${ciClientUrl} --proxy=no`);
+}
+exports.downloadJar = downloadJar;
+function runParallel() {
+    // only 1 worker per step, maybe on our own infrastracture it's possible?
+}
+exports.runParallel = runParallel;
+function runToscaTestForSpecificEntity(dexUrl, aoServicePort) {
+    let testCases = []; // read from yaml file latter
+    testCases.forEach(testCase => {
+        createConfigFile(dexUrl, aoServicePort, testCase.toscaWorkspace);
+        createTestEventXml("", testCase.toscaUniqueId); // where is this 'folderName' param?
+        runToscaTestForSingleEntity(testCase.toscaUniqueId);
+        let pathToJunitXml = testCase.toscaUniqueId + ".xml";
+        // Send data to Harold
+        // to be implemented
+    });
+}
+exports.runToscaTestForSpecificEntity = runToscaTestForSpecificEntity;
+function runToscaTestForSingleEntity(toscaUniqueId) {
+    (0, ShUtils_1.execInShell)(`export JAVA_TOOL_OPTIONS=
+                java -jar ToscaCIJavaClient.jar -m distributed -c nodes.xml -r ${toscaUniqueId}.xml`);
+}
+exports.runToscaTestForSingleEntity = runToscaTestForSingleEntity;
 function createConfigFile(dexUrl, aoServicePort, toscaWorkspace) {
     let content = `address=${dexUrl}/DistributionServerService/ManagerService.svc
         username=

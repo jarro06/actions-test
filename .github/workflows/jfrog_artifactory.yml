@@ -57,4 +57,4 @@ jobs:
     # upload only jars "upload all" - from shared libraries
     - name: Upload jars to different repository
       run: |
-        jf rt upload "build/**/*.jar" my-jar-repository
+        jf rt upload "build/**/*.jar" my-project-jars-gradle-dev-local

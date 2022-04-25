@@ -25,6 +25,7 @@ jobs:
     steps:
 #     every action is github repo, checkout: https://github.com/actions/checkout/blob/main/action.yml
     - uses: actions/checkout@v2
+    - uses: jfrog/setup-jfrog-cli@v2
 
 
     - name: Set up JDK 17
@@ -42,19 +43,18 @@ jobs:
 
     # connects to jfrog cli with artifactory url and access token (access token can be created in jfrog control panel
     - name: Log into Jfrog Artifactory
-      uses: jfrog/setup-jfrog-cli@v2
       run: |
         jf c add kermit --artifactory-url=${{ secrets.JF_ARTIFACTORY_SERVER_URL }} --access-token=${{ secrets.JF_ACCSESS_TOKEN }}
+
     # "/build" is pattern, example-repo-local is target
     # upload all files under /build to "example-repo-local" repository in artifactory
     # can also specify regex for files to upload or upload single file - for more info go to  jfrog repository documentation
     # https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory
     - name: Upload all build files to repository
-      uses: jfrog/setup-jfrog-cli@v2
       run: |
         jf rt upload "build/" example-repo-local
+
     # upload only jars "upload all" - from shared libraries
     - name: Upload jars to different repository
-      uses: jfrog/setup-jfrog-cli@v2
       run: |
         jf rt upload "build/**/*.jar" my-jar-repository

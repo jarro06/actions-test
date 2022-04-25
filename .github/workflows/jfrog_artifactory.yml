@@ -45,5 +45,4 @@ jobs:
     - run: |
         jf c add kermit --artifactory-url=${{ secrets.JF_ARTIFACTORY_SERVER_URL }} --access-token=${{ secrets.JF_ACCSESS_TOKEN }}
         jf rt ping
-#        jf rt u "build/" example-repo-local
         jf rt d "example-repo-local/build"

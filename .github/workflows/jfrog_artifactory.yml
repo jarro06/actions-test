@@ -26,9 +26,8 @@ jobs:
 #     every action is github repo, checkout: https://github.com/actions/checkout/blob/main/action.yml
     - uses: actions/checkout@v2
     - uses: jfrog/setup-jfrog-cli@v2
-      run: |
-      # Ping the server
-          jf rt ping
+    - run: |
+        jf rt ping
 
 #    - name: Set up JDK 17
 #      uses: actions/setup-java@v2

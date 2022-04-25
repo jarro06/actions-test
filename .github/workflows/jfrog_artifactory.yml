@@ -62,3 +62,8 @@ jobs:
     - name: Download jars from repository
       run: |
         jf rt download my-project-jars-gradle-dev-local my-jars/
+
+    # echo downloaded files
+    - name: Show downloaded files
+      run: |
+        ls ${{ github.workspace }}/my-jars
